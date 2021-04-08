@@ -26,6 +26,7 @@ import { AppInterceptor } from './theme/utils/app-interceptor';
 import { OptionsComponent } from './theme/components/options/options.component';
 import { FooterComponent } from './theme/components/footer/footer.component';
 
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
    imports: [
@@ -36,6 +37,7 @@ import { FooterComponent } from './theme/components/footer/footer.component';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDLf9Ywk47zipEtorDewwMmB3JtuXdzYL4'
     }),
+    MatSelectModule,
     SharedModule,
     routing
   ],
@@ -48,7 +50,10 @@ import { FooterComponent } from './theme/components/footer/footer.component';
     SidenavMenuComponent,
     BreadcrumbComponent,
     OptionsComponent,
-    FooterComponent    
+    FooterComponent,
+
+    
+   
   ], 
   providers: [
     AppSettings,

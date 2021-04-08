@@ -5,6 +5,7 @@ import { ProductDialogComponent } from '../../shared/products-carousel/product-d
 import { AppService } from '../../app.service';
 import { Product, Category } from "../../app.models";
 import { Settings, AppSettings } from 'src/app/app.settings';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-products',
@@ -66,7 +67,8 @@ export class ProductsComponent implements OnInit {
               private activatedRoute: ActivatedRoute, 
               public appService:AppService, 
               public dialog: MatDialog, 
-              private router: Router) {
+              private router: Router,
+              private productService:ProductService) {
     this.settings = this.appSettings.settings;
   }
 
@@ -89,13 +91,15 @@ export class ProductsComponent implements OnInit {
   }
 
   public getAllProducts(){
-    this.appService.getProducts("featured").subscribe(data=>{
-      this.products = data; 
-      //for show more product  
-      for (var index = 0; index < 3; index++) {
-        this.products = this.products.concat(this.products);        
-      }
-    });
+    this.productService.getAllProducts().subscribe((data: any) => {
+      console.log(data);
+      
+      this.products = data;
+      console.log(this.products);
+      // for (var index = 0; index < 3; index++) {
+      //   this.products = this.products.concat(this.products);        
+      // }
+    })
   }
 
   public getCategories(){  

@@ -13,7 +13,9 @@ export class AccountComponent implements OnInit {
     { name: 'Account Dashboard', href: 'dashboard', icon: 'dashboard' },
     { name: 'Account Information', href: 'information', icon: 'info' },
     { name: 'Addresses', href: 'addresses', icon: 'location_on' },
+    { name: 'Add product', href: 'addProduct', icon: 'add product' },
     { name: 'Order History', href: 'orders', icon: 'add_shopping_cart' },  
+    { name: 'List of product', href: 'listOfProducts', icon: 'list of products' },  
     { name: 'Logout', href: '/sign-in', icon: 'power_settings_new' },    
   ];
   constructor(public router:Router) { }

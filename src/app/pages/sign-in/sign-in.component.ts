@@ -15,7 +15,10 @@ import { AuthentificationService } from 'src/app/services/authentification.servi
 export class SignInComponent implements OnInit {
   loginForm: FormGroup;
   registerForm: FormGroup;
-  user:User
+  user:User;
+  
+ 
+  
 
   constructor(public formBuilder: FormBuilder, public router:Router, public snackBar: MatSnackBar, private auth:AuthentificationService) { }
 
@@ -31,7 +34,7 @@ export class SignInComponent implements OnInit {
       'username': ['', Validators.compose([Validators.required, Validators.minLength(3)])],
       'email': ['', Validators.compose([Validators.required, emailValidator])],
       'phone': ['', Validators.compose([Validators.required,])],
-      'password': ['', Validators.required],
+      'password': ['', Validators.required,],
       'confirmPassword': ['', Validators.required]
     },{validator: matchingPasswords('password', 'confirmPassword')});
 
@@ -39,14 +42,30 @@ export class SignInComponent implements OnInit {
 
   public onLoginFormSubmit(values:Object):void {
     if (this.loginForm.valid) { 
-      console.log(this.user);
-      console.log(this.loginForm.value);
+      // console.log(this.user);
+      // console.log(this.loginForm.value);
+      
       
       this.auth.login(this.loginForm.value).subscribe(result=>{
       if (JSON.parse(JSON.stringify(result)).message="login sucessful") {
-        localStorage.setItem("token",result.token);
+        console.log(JSON.parse(JSON.stringify(result)).user);
+        
+        if ((JSON.parse(JSON.stringify(result)).user.email=="admin@admin.com")){
+        console.log("zzzzzzzzz");
+        
+          const role="admin"
+          localStorage.setItem("token",result.token);
+        localStorage.setItem("admin","role");
         this.snackBar.open('login successful', '×', { panelClass: 'success', verticalPosition: 'top', duration: 3000 });
         this.router.navigate(['/']);
+      }
+      else {
+        
+        localStorage.setItem("token",result.token);
+      
+        this.snackBar.open('login successful', '×', { panelClass: 'success', verticalPosition: 'top', duration: 3000 });
+        this.router.navigate(['/']);
+      }
       } 
       else if (JSON.parse(JSON.stringify(result)).message="password does not matched"){
         this.snackBar.open('email or password does not matched', '×', { panelClass: 'danger', verticalPosition: 'top', duration: 3000 });

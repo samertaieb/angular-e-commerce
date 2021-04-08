@@ -1,0 +1,44 @@
+<div class="mat-table orders-table">
+  <div class="mat-header-row">
+    <div class="mat-header-cell">name</div>
+    <div class="mat-header-cell">stock</div>
+    <div class="mat-header-cell">price</div>
+  </div>
+  <div *ngFor="let product of products" class="mat-row">
+    <div class="mat-cell">
+      <span class="order">{{ product.name }}</span>
+    </div>
+    <div class="mat-cell">{{ product.stock }}</div>
+    <div class="mat-cell">{{ product.price }}</div>
+    <div class="mat-cell">{{ product.total }}</div>
+    <div class="mat-cell">
+      <div class="p-1 actions">
+        <button
+          mat-mini-fab
+          (click)="openProductDialog(product)"
+          color="primary"
+          matTooltip="View"
+        >
+          <mat-icon>remove_red_eye</mat-icon>
+        </button>
+        <button
+          mat-mini-fab
+          color=""
+          matTooltip="View"
+          (click)="deleteProduct(product._id)"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+        <!-- <button
+          *ngIf="order.invoice"
+          mat-mini-fab
+          color="warn"
+          matTooltip="View invoice"
+          class="btn-invoice"
+        >
+          <mat-icon>receipt</mat-icon>
+        </button> -->
+      </div>
+    </div>
+  </div>
+</div>
